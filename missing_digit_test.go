@@ -12,3 +12,8 @@ func Test_SecondAddition(t *testing.T) {
 	res := MissingDigit("x + 10 = 10")
 	assert.Equal(t, 0, res)
 }
+
+func Test_ThirdAddition(t *testing.T) {
+	res := MissingDigit("2 + 12 = 1x")
+	assert.Equal(t, 4, res)
+}
