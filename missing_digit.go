@@ -1,14 +1,35 @@
 package missing_digit_exercise
 
+import (
+	"strconv"
+	"strings"
+)
+
 func MissingDigit(s string) int {
-	if s == "x + 10 = 10" {
-		return 0
+	tokens := strings.Split(s, " ")
+
+	for i := 0; i < 10; i++ {
+		firstNumAsString := tokens[0]
+		secondNumAsString := tokens[2]
+		thirdNumAsString := tokens[4]
+		if strings.Contains(firstNumAsString, "x") {
+			firstNumAsString = strings.Replace(firstNumAsString, "x", strconv.Itoa(i), 1)
+		}
+		if strings.Contains(secondNumAsString, "x") {
+			secondNumAsString = strings.Replace(secondNumAsString, "x", strconv.Itoa(i), 1)
+		}
+		if strings.Contains(thirdNumAsString, "x") {
+			thirdNumAsString = strings.Replace(thirdNumAsString, "x", strconv.Itoa(i), 1)
+		}
+
+		firstNum, _ := strconv.Atoi(firstNumAsString)
+		secondNum, _ := strconv.Atoi(secondNumAsString)
+		thirdNum, _ := strconv.Atoi(thirdNumAsString)
+
+		if firstNum+secondNum == thirdNum {
+			return i
+		}
 	}
-	if s == "2 + 12 = 1x" {
-		return 4
-	}
-	if s == "2x + 312 = 335" {
-		return 3
-	}
-	return 2
+
+	return 0
 }
