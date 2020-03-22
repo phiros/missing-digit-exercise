@@ -14,13 +14,8 @@ func MissingDigit(s string) int {
 		return i
 	}
 	if op == "-" {
-		for i := 0; i < 10; i++ {
-			firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
-
-			if firstNum-secondNum == thirdNum {
-				return i
-			}
-		}
+		i := findDigitForSubtraction(tokens)
+		return i
 	}
 	if op == "*" {
 		for i := 0; i < 10; i++ {
@@ -39,6 +34,16 @@ func findDigitForAddition(tokens []string) int {
 	for i := 0; i < 10; i++ {
 		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
 		if firstNum+secondNum == thirdNum {
+			return i
+		}
+	}
+	return 0
+}
+
+func findDigitForSubtraction(tokens []string) int {
+	for i := 0; i < 10; i++ {
+		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
+		if firstNum-secondNum == thirdNum {
 			return i
 		}
 	}
