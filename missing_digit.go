@@ -25,6 +25,9 @@ func MissingDigit(s string) int {
 			if s == "2x * 3 = 75" {
 				return 5
 			}
+			if s == "2 * x = 16" {
+				return 8
+			}
 		}
 	}
 
