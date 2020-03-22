@@ -9,19 +9,27 @@ func MissingDigit(s string) int {
 	tokens := strings.Split(s, " ")
 	op := tokens[1]
 
-	for i := 0; i < 10; i++ {
-		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
-		if op == "+" {
+	if op == "+" {
+		for i := 0; i < 10; i++ {
+			firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
 			if firstNum+secondNum == thirdNum {
 				return i
 			}
 		}
-		if op == "-" {
+	}
+	if op == "-" {
+		for i := 0; i < 10; i++ {
+			firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
+
 			if firstNum-secondNum == thirdNum {
 				return i
 			}
 		}
-		if op == "*" {
+	}
+	if op == "*" {
+		for i := 0; i < 10; i++ {
+			firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
+
 			if firstNum*secondNum == thirdNum {
 				return i
 			}
