@@ -5,50 +5,38 @@ import (
 	"strings"
 )
 
+type equationChecker func(num1, num2, num3 int) bool
+
 func MissingDigit(s string) int {
 	tokens := strings.Split(s, " ")
 	op := tokens[1]
 
 	if op == "+" {
-		i := findDigitForAddition(tokens)
+		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+			return num1+num2 == num3
+		})
 		return i
 	}
 	if op == "-" {
-		i := findDigitForSubtraction(tokens)
+		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+			return num1-num2 == num3
+		})
 		return i
 	}
 	if op == "*" {
-		i := findDigitForMultiplication(tokens)
+		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+			return num1*num2 == num3
+		})
 		return i
 	}
 
 	return 0
 }
 
-func findDigitForAddition(tokens []string) int {
+func findDigit(tokens []string, isEquation equationChecker) int {
 	for i := 0; i < 10; i++ {
 		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
-		if firstNum+secondNum == thirdNum {
-			return i
-		}
-	}
-	return 0
-}
-
-func findDigitForSubtraction(tokens []string) int {
-	for i := 0; i < 10; i++ {
-		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
-		if firstNum-secondNum == thirdNum {
-			return i
-		}
-	}
-	return 0
-}
-
-func findDigitForMultiplication(tokens []string) int {
-	for i := 0; i < 10; i++ {
-		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
-		if firstNum*secondNum == thirdNum {
+		if isEquation(firstNum, secondNum, thirdNum) {
 			return i
 		}
 	}
