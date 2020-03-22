@@ -7,6 +7,18 @@ import (
 
 type equationChecker func(num1, num2, num3 int) bool
 
+// MissingDigit takes as input an equation as a string which
+// contains three numbers in total and one operand.
+// An operand may be +, -, * or /.
+// One number in the equation must contain an "x" (a missing digit).
+// The function returns this missing digit as a int.
+// Example:
+// MissingDigit("2x + 4 = 28") will return 4
+//
+// Note that all tokens in the equation must be separated by a
+// whitespace. Furthermore note that the function DOES NOT check
+// whether the input corresponds to exactly this format. The caller
+// is responsible for ensuring the validity of the equation string.
 func MissingDigit(s string) int {
 	tokens := strings.Split(s, " ")
 	op := tokens[1]
