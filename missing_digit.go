@@ -22,14 +22,8 @@ func MissingDigit(s string) int {
 			}
 		}
 		if op == "*" {
-			if s == "2x * 3 = 75" {
-				return 5
-			}
-			if s == "2 * x = 16" {
-				return 8
-			}
-			if s == "3 * 3 = x" {
-				return 9
+			if firstNum*secondNum == thirdNum {
+				return i
 			}
 		}
 	}
