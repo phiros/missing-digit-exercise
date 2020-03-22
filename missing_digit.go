@@ -16,14 +16,8 @@ func MissingDigit(s string) int {
 				return i
 			}
 		} else {
-			if s == "2x - 2 = 20" {
-				return 2
-			}
-			if s == "20 - x = 16" {
-				return 4
-			}
-			if s == "20 - 3 = 1x" {
-				return 7
+			if firstNum-secondNum == thirdNum {
+				return i
 			}
 		}
 	}
