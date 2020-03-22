@@ -27,6 +27,11 @@ func MissingDigit(s string) int {
 			return num1*num2 == num3
 		})
 		return i
+	case "/":
+		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+			return num1/num2 == num3
+		})
+		return i
 	}
 
 	return 0

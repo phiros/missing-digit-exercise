@@ -52,3 +52,18 @@ func Test_ThirdMultiplication(t *testing.T) {
 	res := MissingDigit("3 * 3 = x")
 	assert.Equal(t, 9, res)
 }
+
+func Test_FirstDivision(t *testing.T) {
+	res := MissingDigit("2x / 5 = 5")
+	assert.Equal(t, 5, res)
+}
+
+func Test_SecondDivision(t *testing.T) {
+	res := MissingDigit("2 / x = 1")
+	assert.Equal(t, 2, res)
+}
+
+func Test_ThirdDivision(t *testing.T) {
+	res := MissingDigit("9 / 3 = x")
+	assert.Equal(t, 3, res)
+}
