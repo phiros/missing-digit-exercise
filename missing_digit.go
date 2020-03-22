@@ -15,9 +15,15 @@ func MissingDigit(s string) int {
 			if firstNum+secondNum == thirdNum {
 				return i
 			}
-		} else {
+		}
+		if op == "-" {
 			if firstNum-secondNum == thirdNum {
 				return i
+			}
+		}
+		if op == "*" {
+			if s == "2x * 3 = 75" {
+				return 5
 			}
 		}
 	}

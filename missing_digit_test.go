@@ -37,3 +37,8 @@ func Test_ThirdSubtraction(t *testing.T) {
 	res := MissingDigit("20 - 3 = 1x")
 	assert.Equal(t, 7, res)
 }
+
+func Test_FirstMultiplication(t *testing.T) {
+	res := MissingDigit("2x * 3 = 75")
+	assert.Equal(t, 5, res)
+}
