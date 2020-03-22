@@ -22,3 +22,8 @@ func Test_FourthAddition(t *testing.T) {
 	res := MissingDigit("2x + 312 = 335")
 	assert.Equal(t, 3, res)
 }
+
+func Test_FirstSubtraction(t *testing.T) {
+	res := MissingDigit("2x - 2 = 20")
+	assert.Equal(t, 2, res)
+}

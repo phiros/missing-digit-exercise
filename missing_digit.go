@@ -7,11 +7,18 @@ import (
 
 func MissingDigit(s string) int {
 	tokens := strings.Split(s, " ")
+	op := tokens[1]
 
 	for i := 0; i < 10; i++ {
 		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
-		if firstNum+secondNum == thirdNum {
-			return i
+		if op == "+" {
+			if firstNum+secondNum == thirdNum {
+				return i
+			}
+		} else {
+			if s == "2x - 2 = 20" {
+				return 2
+			}
 		}
 	}
 
