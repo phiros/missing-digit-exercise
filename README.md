@@ -15,7 +15,10 @@ There are various way to approach this problem. In most languages
 which include an "eval" function (a function that takes a statement written
 in this language and returns the result of this statement) the solution is
 trivial.
-In go where there is no such function. This is why this solution is a bit more involved.
+In go where there is no such function in the standard library the solution is a bit more involved (1).
+
+(1) There is a parser which returns an AST. This could have been another solution. However, I feared
+that working with the AST would increase the complexity of the solution. 
 
 ## Methodology
 The chosen solution was developed using TDD (although I got sloppy at the end) and extracts
