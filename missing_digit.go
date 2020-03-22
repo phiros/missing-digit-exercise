@@ -57,7 +57,7 @@ func MissingDigit(s string) (int, error) {
 
 func findDigit(tokens []string, isEquation equationChecker) (int, error) {
 	for i := 0; i < 10; i++ {
-		firstNum, secondNum, thirdNum, err := NumbersWithFilledDigit(tokens, i)
+		firstNum, secondNum, thirdNum, err := numbersWithFilledDigit(tokens, i)
 		if err != nil {
 			return 0, err
 		}
@@ -68,7 +68,7 @@ func findDigit(tokens []string, isEquation equationChecker) (int, error) {
 	return 0, errors.New("cannot determine missing digit")
 }
 
-func NumbersWithFilledDigit(tokens []string, missingDigit int) (int, int, int, error) {
+func numbersWithFilledDigit(tokens []string, missingDigit int) (int, int, int, error) {
 	firstNumAsString := tokens[0]
 	secondNumAsString := tokens[2]
 	thirdNumAsString := tokens[4]
