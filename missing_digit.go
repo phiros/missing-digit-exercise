@@ -1,6 +1,8 @@
 package missing_digit_exercise
 
 import (
+	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -16,63 +18,76 @@ type equationChecker func(num1, num2, num3 int) bool
 // MissingDigit("2x + 4 = 28") will return 4
 //
 // Note that all tokens in the equation must be separated by a
-// whitespace. Furthermore note that the function DOES NOT check
-// whether the input corresponds to exactly this format. The caller
-// is responsible for ensuring the validity of the equation string.
-func MissingDigit(s string) int {
+// whitespace.
+func MissingDigit(s string) (int, error) {
 	tokens := strings.Split(s, " ")
+	if len(tokens) != 5 {
+		return 0, fmt.Errorf("wrong format for equation: \"%s\" (missing whitespace?)", s)
+	}
 	op := tokens[1]
 
 	switch op {
 	case "+":
-		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+		i, err := findDigit(tokens, func(num1, num2, num3 int) bool {
 			return num1+num2 == num3
 		})
-		return i
+		return i, err
 	case "-":
-		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+		i, err := findDigit(tokens, func(num1, num2, num3 int) bool {
 			return num1-num2 == num3
 		})
-		return i
+		return i, err
 	case "*":
-		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+		i, err := findDigit(tokens, func(num1, num2, num3 int) bool {
 			return num1*num2 == num3
 		})
-		return i
+		return i, err
 	case "/":
-		i := findDigit(tokens, func(num1, num2, num3 int) bool {
+		i, err := findDigit(tokens, func(num1, num2, num3 int) bool {
 			if num2 == 0 {
 				return false
 			}
 			return num1/num2 == num3
 		})
-		return i
+		return i, err
 	}
 
-	return 0
+	return 0, fmt.Errorf("cannot handle: \"%s\" please check equation format", s)
 }
 
-func findDigit(tokens []string, isEquation equationChecker) int {
+func findDigit(tokens []string, isEquation equationChecker) (int, error) {
 	for i := 0; i < 10; i++ {
-		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
+		firstNum, secondNum, thirdNum, err := NumbersWithFilledDigit(tokens, i)
+		if err != nil {
+			return 0, err
+		}
 		if isEquation(firstNum, secondNum, thirdNum) {
-			return i
+			return i, nil
 		}
 	}
-	return 0
+	return 0, errors.New("cannot determine missing digit")
 }
 
-func NumbersWithFilledDigit(tokens []string, missingDigit int) (int, int, int) {
+func NumbersWithFilledDigit(tokens []string, missingDigit int) (int, int, int, error) {
 	firstNumAsString := tokens[0]
 	secondNumAsString := tokens[2]
 	thirdNumAsString := tokens[4]
 	firstNumAsString = replaceXWithDigit(firstNumAsString, missingDigit)
 	secondNumAsString = replaceXWithDigit(secondNumAsString, missingDigit)
 	thirdNumAsString = replaceXWithDigit(thirdNumAsString, missingDigit)
-	firstNum, _ := strconv.Atoi(firstNumAsString)
-	secondNum, _ := strconv.Atoi(secondNumAsString)
-	thirdNum, _ := strconv.Atoi(thirdNumAsString)
-	return firstNum, secondNum, thirdNum
+	firstNum, err := strconv.Atoi(firstNumAsString)
+	if err != nil {
+		return 0, 0, 0, err
+	}
+	secondNum, err := strconv.Atoi(secondNumAsString)
+	if err != nil {
+		return 0, 0, 0, err
+	}
+	thirdNum, err := strconv.Atoi(thirdNumAsString)
+	if err != nil {
+		return 0, 0, 0, err
+	}
+	return firstNum, secondNum, thirdNum, nil
 }
 
 func replaceXWithDigit(numberAsString string, missingDigit int) string {
