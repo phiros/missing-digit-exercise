@@ -47,3 +47,8 @@ func Test_SecondMultiplication(t *testing.T) {
 	res := MissingDigit("2 * x = 16")
 	assert.Equal(t, 8, res)
 }
+
+func Test_ThirdMultiplication(t *testing.T) {
+	res := MissingDigit("3 * 3 = x")
+	assert.Equal(t, 9, res)
+}
