@@ -11,19 +11,18 @@ func MissingDigit(s string) int {
 	tokens := strings.Split(s, " ")
 	op := tokens[1]
 
-	if op == "+" {
+	switch op {
+	case "+":
 		i := findDigit(tokens, func(num1, num2, num3 int) bool {
 			return num1+num2 == num3
 		})
 		return i
-	}
-	if op == "-" {
+	case "-":
 		i := findDigit(tokens, func(num1, num2, num3 int) bool {
 			return num1-num2 == num3
 		})
 		return i
-	}
-	if op == "*" {
+	case "*":
 		i := findDigit(tokens, func(num1, num2, num3 int) bool {
 			return num1*num2 == num3
 		})
