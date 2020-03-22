@@ -10,12 +10,8 @@ func MissingDigit(s string) int {
 	op := tokens[1]
 
 	if op == "+" {
-		for i := 0; i < 10; i++ {
-			firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
-			if firstNum+secondNum == thirdNum {
-				return i
-			}
-		}
+		i := findDigitForAddition(tokens)
+		return i
 	}
 	if op == "-" {
 		for i := 0; i < 10; i++ {
@@ -36,6 +32,16 @@ func MissingDigit(s string) int {
 		}
 	}
 
+	return 0
+}
+
+func findDigitForAddition(tokens []string) int {
+	for i := 0; i < 10; i++ {
+		firstNum, secondNum, thirdNum := NumbersWithFilledDigit(tokens, i)
+		if firstNum+secondNum == thirdNum {
+			return i
+		}
+	}
 	return 0
 }
 
